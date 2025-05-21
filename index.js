@@ -9,12 +9,6 @@ const expressHandlebars = require("express-handlebars");
 const { createStarList } = require("./controllers/handlebarsHelper");
 const { createPagination } = require("express-handlebars-paginate");
 const session = require("express-session");
-const redisStore = require("connect-redis").default;
-const { createClient } = require("redis");
-const redisClient = createClient({
-  url: process.env.REDIS_URL,
-});
-redisClient.connect().catch(console.error);
 const passport = require("./controllers/passport");
 const flash = require("connect-flash");
 
@@ -47,8 +41,7 @@ app.use(express.urlencoded({ extended: false }));
 // cau hinh su dung session
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
-    store: new redisStore({ client: redisClient }),
+    secret: "your-secret-key",
     resave: false,
     saveUninitialized: false,
     cookie: {
