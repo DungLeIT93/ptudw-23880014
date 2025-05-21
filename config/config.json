@@ -1,4 +1,5 @@
 {
+   "use_env_variable": "POSTGRES_URL",
   "development": {
     "username": "ptudwprojectdb",
     "password": "4V8StA25VcK3yGzl62gpZ4ugMFS3N03E",

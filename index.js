@@ -12,8 +12,7 @@ const session = require("express-session");
 const redisStore = require("connect-redis").default;
 const { createClient } = require("redis");
 const redisClient = createClient({
-  // url: 'rediss://red-d0muoju3jp1c738n61v0:qho9arGt8AtTJkjpg0bH2ojLxoT6uPel@oregon-keyvalue.render.com:6379',
-  url: 'redis://red-d0muoju3jp1c738n61v0:6379',
+  url: process.env.REDIS_URL,
 });
 redisClient.connect().catch(console.error);
 const passport = require("./controllers/passport");
@@ -48,7 +47,7 @@ app.use(express.urlencoded({ extended: false }));
 // cau hinh su dung session
 app.use(
   session({
-    secret: "your-secret-key",
+    secret: process.env.SESSION_SECRET,
     store: new redisStore({ client: redisClient }),
     resave: false,
     saveUninitialized: false,
